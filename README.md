@@ -1,4 +1,4 @@
-Math3D
+Bloyteg.AW.Math
 ======
 
-3d math library for .NET
+Math library for .NET, mostly related to Active Worlds.
