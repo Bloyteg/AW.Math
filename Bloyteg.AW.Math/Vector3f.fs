@@ -13,19 +13,19 @@
 // limitations under the License.
 namespace Bloyteg.AW.Math
 
-type Vector3d = 
-    { X : float
-      Y : float
-      Z : float }
+type Vector3f = 
+    { X : single
+      Y : single
+      Z : single }
     
-    static member Make(x: float, y: float, z: float) = { X = x; Y = y; Z = z; }
+    static member Make(x: single, y: single, z: single) = { X = x; Y = y; Z = z; }
 
-    static member Zero = Vector3d.Make(0.0, 0.0, 0.0)
+    static member Zero = Vector3f.Make(0.0f, 0.0f, 0.0f)
     
-    member this.Length: float = this |> Vector.length
+    member this.Length: single = this |> Vector.length
     
-    member this.Normalized: Vector3d = this |> Vector.normalized
+    member this.Normalized: Vector3f = this |> Vector.normalized
 
-    member this.Dot(other : Vector3d): float = this |> Vector.dot other
+    member this.Dot(other : Vector3f): single = this |> Vector.dot other
 
-    member this.Cross(other : Vector3d): Vector3d = this |> Vector.cross other
+    member this.Cross(other : Vector3f): Vector3f = this |> Vector.cross other
