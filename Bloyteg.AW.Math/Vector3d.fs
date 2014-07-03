@@ -22,10 +22,10 @@ type Vector3d =
 
     static member Zero = Vector3d.Make(0.0, 0.0, 0.0)
     
-    member this.Length: float = this |> Vector.length
+    member this.Length: float = Vector3.length this
     
-    member this.Normalized: Vector3d = this |> Vector.normalized
+    member this.Normalized: Vector3d = Vector3.normalized this
 
-    member this.Dot(other : Vector3d): float = this |> Vector.dot other
+    member this.Dot(other : Vector3d): float = Vector3.dot this other
 
-    member this.Cross(other : Vector3d): Vector3d = this |> Vector.cross other
+    member this.Cross(other : Vector3d): Vector3d = Vector3.cross this other
