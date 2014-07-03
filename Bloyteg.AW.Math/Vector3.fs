@@ -27,7 +27,7 @@ module Vector3 =
         let (x, y, z) = unpack vector
         sqrt ((x * x) + (y * y) + (z * z))
 
-    let inline normalized vector : ^V = 
+    let inline normalize vector : ^V = 
         let (x, y, z) = unpack vector
         let length = length vector
         pack (x/length) (y/length) (z/length)
