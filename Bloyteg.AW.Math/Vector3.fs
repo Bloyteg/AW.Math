@@ -13,7 +13,7 @@
 // limitations under the License.
 namespace Bloyteg.AW.Math
 
-module Vector = 
+module Vector3 = 
     let inline pack x y z = 
         (^V : (static member Make : ^S * ^S * ^S -> ^V) (x, y, z))
 
