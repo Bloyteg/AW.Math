@@ -24,7 +24,7 @@ type Vector3d =
     
     member this.Length: float = Vector3.length this
     
-    member this.Normalized: Vector3d = Vector3.normalized this
+    member this.Normalized: Vector3d = Vector3.normalize this
 
     member this.Dot(other : Vector3d): float = Vector3.dot this other
 
