@@ -42,7 +42,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vector.fs" />
+    <Compile Include="Vector3.fs" />
     <Compile Include="Vector3f.fs" />
     <Compile Include="Vector3d.fs" />
   </ItemGroup>
