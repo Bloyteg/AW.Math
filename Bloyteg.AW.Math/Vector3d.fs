@@ -18,9 +18,9 @@ type Vector3d =
       Y : float
       Z : float }
     
-    static member Make(x: float, y: float, z: float) = { X = x; Y = y; Z = z; }
+    static member Create(x: float, y: float, z: float) = { X = x; Y = y; Z = z; }
 
-    static member Zero = Vector3d.Make(0.0, 0.0, 0.0)
+    static member Zero = Vector3d.Create(0.0, 0.0, 0.0)
     
     member this.Length: float = Vector3.length this
     

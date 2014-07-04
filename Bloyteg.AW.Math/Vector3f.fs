@@ -18,9 +18,9 @@ type Vector3f =
       Y : single
       Z : single }
     
-    static member Make(x: single, y: single, z: single) = { X = x; Y = y; Z = z; }
+    static member Create(x: single, y: single, z: single) = { X = x; Y = y; Z = z; }
 
-    static member Zero = Vector3f.Make(0.0f, 0.0f, 0.0f)
+    static member Zero = Vector3f.Create(0.0f, 0.0f, 0.0f)
     
     member this.Length: single = Vector3.length this
     

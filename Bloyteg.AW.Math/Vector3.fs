@@ -15,7 +15,7 @@ namespace Bloyteg.AW.Math
 
 module Vector3 = 
     let inline pack x y z = 
-        (^V : (static member Make : ^S * ^S * ^S -> ^V) (x, y, z))
+        (^V : (static member Create : ^S * ^S * ^S -> ^V) (x, y, z))
 
     let inline unpack vector =
         let x = (^V : (member X : ^S) vector)
