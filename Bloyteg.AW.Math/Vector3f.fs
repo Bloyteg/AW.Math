@@ -29,3 +29,5 @@ type Vector3f =
     member this.Dot(other : Vector3f): single = Vector3.dot this other
 
     member this.Cross(other : Vector3f): Vector3f = Vector3.cross this other
+
+    override this.ToString() = System.String.Format("({0}, {1}, {2})", this.X, this.Y, this.Z)
