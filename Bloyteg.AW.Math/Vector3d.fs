@@ -29,3 +29,5 @@ type Vector3d =
     member this.Dot(other : Vector3d): float = Vector3.dot this other
 
     member this.Cross(other : Vector3d): Vector3d = Vector3.cross this other
+
+    override this.ToString() = System.String.Format("({0}, {1}, {2})", this.X, this.Y, this.Z)
