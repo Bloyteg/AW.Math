@@ -12,11 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 namespace Bloyteg.AW.Math
+open System.Runtime.InteropServices
 
+[<StructLayout(LayoutKind.Explicit)>]
 type Vector3f = 
-    { X : single
-      Y : single
-      Z : single }
+    { [<field: FieldOffset(0)>]  X : single
+      [<field: FieldOffset(4)>]  Y : single
+      [<field: FieldOffset(8)>] Z : single }
     
     static member Create(x: single, y: single, z: single) = { X = x; Y = y; Z = z; }
 

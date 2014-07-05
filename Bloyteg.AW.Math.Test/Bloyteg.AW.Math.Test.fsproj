@@ -54,7 +54,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="app.config" />
-    <Compile Include="VectorTests.fs" />
+    <Compile Include="Vector3f_Tests.fs" />
+    <Compile Include="Vector3d_Tests.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsUnit.NUnit">
