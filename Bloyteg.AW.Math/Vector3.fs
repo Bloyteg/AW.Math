@@ -23,11 +23,19 @@ module Vector3 =
         let z = (^V : (member Z : ^S) vector)
         (x, y, z)
 
-    let inline add lhs rhs : ^V =
+    let inline addScalar vector scalar : ^V =
+        match vector with
+        | Vector3(x, y, z) -> create (x+scalar) (y+scalar) (z+scalar)
+
+    let inline addPointwise lhs rhs : ^V =
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX + rhsX) (lhsY + rhsY) (lhsZ + rhsZ)
 
-    let inline subtract lhs rhs : ^V =
+    let inline subtractScalar vector scalar : ^V =
+        match vector with
+        | Vector3(x, y, z) -> create (x-scalar) (y-scalar) (z-scalar)
+
+    let inline subtractPointwise lhs rhs : ^V =
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX - rhsX) (lhsY - rhsY) (lhsZ - rhsZ)
 
@@ -38,6 +46,14 @@ module Vector3 =
     let inline divideScalar vector (scalar: ^S) : ^V =
         match vector with
         | Vector3(x, y, z) -> create (x/scalar) (y/scalar) (z/scalar)
+
+    let inline multiplyPointwise lhs rhs : ^V =
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX * rhsX) (lhsY * rhsY) (lhsZ * rhsZ)
+
+    let inline dividePointwise lhs rhs : ^V =
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX / rhsX) (lhsY / rhsY) (lhsZ / rhsZ)
 
     let inline negate vector : ^V =
         match vector with
@@ -57,4 +73,4 @@ module Vector3 =
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create ((lhsY * rhsZ) - (lhsZ * rhsY)) ((lhsZ * rhsX) - (lhsX * rhsZ)) ((lhsX * rhsY) - (lhsY * rhsX))
 
-
+//TODO: Implement min, max, clamp, lerp, distance, reflect

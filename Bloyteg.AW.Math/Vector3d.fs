@@ -12,24 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 namespace Bloyteg.AW.Math
+
 open System.Runtime.InteropServices
 
 [<StructLayout(LayoutKind.Explicit)>]
 type Vector3d = 
-    { [<field: FieldOffset(0)>]  X : float
-      [<field: FieldOffset(8)>]  Y : float
-      [<field: FieldOffset(16)>] Z : float }
+    { [<FieldOffset(0)>] X : float
+      [<FieldOffset(8)>] Y : float
+      [<FieldOffset(16)>] Z : float }
     
-    static member Create(x: float, y: float, z: float) = { X = x; Y = y; Z = z; }
-
+    static member Create(x : float, y : float, z : float) = 
+        { X = x
+          Y = y
+          Z = z }
+    
     static member Zero = Vector3d.Create(0.0, 0.0, 0.0)
-    
-    member this.Length: float = Vector3.length this
-    
-    member this.Normalized: Vector3d = Vector3.normalize this
-
-    member this.Dot(other : Vector3d): float = Vector3.dot this other
-
-    member this.Cross(other : Vector3d): Vector3d = Vector3.cross this other
-
+    member this.Length : float = Vector3.length this
+    member this.Normalized : Vector3d = Vector3.normalize this
+    member this.Dot(other : Vector3d) : float = Vector3.dot this other
+    member this.Cross(other : Vector3d) : Vector3d = Vector3.cross this other
     override this.ToString() = System.String.Format("({0}, {1}, {2})", this.X, this.Y, this.Z)
