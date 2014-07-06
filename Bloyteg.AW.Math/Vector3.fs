@@ -73,4 +73,20 @@ module Vector3 =
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create ((lhsY * rhsZ) - (lhsZ * rhsY)) ((lhsZ * rhsX) - (lhsX * rhsZ)) ((lhsX * rhsY) - (lhsY * rhsX))
 
+    let inline min lhs rhs : ^V =
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (min lhsX rhsX) (min lhsY rhsY) (min lhsZ rhsZ)
+
+    let inline max lhs rhs : ^V =
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (max lhsX rhsX) (max lhsY rhsY) (max lhsZ rhsZ)
+
+    let inline dinstance lhs rhs : ^S = 
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> 
+            let x = lhsX - rhsX
+            let y = lhsY - rhsY
+            let z = lhsZ - rhsZ
+            sqrt (x*y + y*y + z*z)
+
 //TODO: Implement min, max, clamp, lerp, distance, reflect
