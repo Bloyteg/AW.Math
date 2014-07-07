@@ -14,79 +14,92 @@
 namespace Bloyteg.AW.Math
 
 module Vector3 = 
-    let inline create x y z = 
-        (^V : (static member Create : ^S * ^S * ^S -> ^V) (x, y, z))
-
-    let inline (|Vector3|) vector =
-        let x = (^V : (member X : ^S) vector)
-        let y = (^V : (member Y : ^S) vector)
-        let z = (^V : (member Z : ^S) vector)
+    let inline create x y z = ((^V : (static member Create : ^S * ^S * ^S -> ^V) (x, y, z)))
+    
+    let inline (|Vector3|) vector = 
+        let x = ((^V : (member X : ^S) vector))
+        let y = ((^V : (member Y : ^S) vector))
+        let z = ((^V : (member Z : ^S) vector))
         (x, y, z)
-
-    let inline addScalar vector scalar : ^V =
+    
+    let inline addScalar vector scalar : ^V = 
         match vector with
-        | Vector3(x, y, z) -> create (x+scalar) (y+scalar) (z+scalar)
-
-    let inline addPointwise lhs rhs : ^V =
+        | Vector3(x, y, z) -> create (x + scalar) (y + scalar) (z + scalar)
+    
+    let inline addPointwise lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX + rhsX) (lhsY + rhsY) (lhsZ + rhsZ)
-
-    let inline subtractScalar vector scalar : ^V =
+    
+    let inline subtractScalar vector scalar : ^V = 
         match vector with
-        | Vector3(x, y, z) -> create (x-scalar) (y-scalar) (z-scalar)
-
-    let inline subtractPointwise lhs rhs : ^V =
+        | Vector3(x, y, z) -> create (x - scalar) (y - scalar) (z - scalar)
+    
+    let inline subtractPointwise lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX - rhsX) (lhsY - rhsY) (lhsZ - rhsZ)
-
-    let inline multiplyScalar vector (scalar: ^S) : ^V =
+    
+    let inline multiplyScalar vector (scalar : ^S) : ^V = 
         match vector with
-        | Vector3(x, y, z) -> create (x*scalar) (y*scalar) (z*scalar)
-
-    let inline divideScalar vector (scalar: ^S) : ^V =
+        | Vector3(x, y, z) -> create (x * scalar) (y * scalar) (z * scalar)
+    
+    let inline divideScalar vector (scalar : ^S) : ^V = 
         match vector with
-        | Vector3(x, y, z) -> create (x/scalar) (y/scalar) (z/scalar)
-
-    let inline multiplyPointwise lhs rhs : ^V =
+        | Vector3(x, y, z) -> create (x / scalar) (y / scalar) (z / scalar)
+    
+    let inline multiplyPointwise lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX * rhsX) (lhsY * rhsY) (lhsZ * rhsZ)
-
-    let inline dividePointwise lhs rhs : ^V =
+    
+    let inline dividePointwise lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (lhsX / rhsX) (lhsY / rhsY) (lhsZ / rhsZ)
-
-    let inline negate vector : ^V =
+    
+    let inline negate vector : ^V = 
         match vector with
         | Vector3(x, y, z) -> create -x -y -z
-
+    
     let inline length vector : ^S = 
         match vector with
         | Vector3(x, y, z) -> sqrt ((x * x) + (y * y) + (z * z))
-
+    
     let inline normalize vector : ^V = divideScalar vector (length vector)
-
-    let inline dot lhs rhs : ^S =
+    
+    let inline dot lhs rhs : ^S = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> (lhsX * rhsX) + (lhsY * rhsY) + (lhsZ * rhsZ)
-
-    let inline cross lhs rhs : ^V =
+    
+    let inline cross lhs rhs : ^V = 
         match (lhs, rhs) with
-        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create ((lhsY * rhsZ) - (lhsZ * rhsY)) ((lhsZ * rhsX) - (lhsX * rhsZ)) ((lhsX * rhsY) - (lhsY * rhsX))
-
-    let inline min lhs rhs : ^V =
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> 
+            create ((lhsY * rhsZ) - (lhsZ * rhsY)) ((lhsZ * rhsX) - (lhsX * rhsZ)) ((lhsX * rhsY) - (lhsY * rhsX))
+    
+    let inline min lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (min lhsX rhsX) (min lhsY rhsY) (min lhsZ rhsZ)
-
-    let inline max lhs rhs : ^V =
+    
+    let inline max lhs rhs : ^V = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> create (max lhsX rhsX) (max lhsY rhsY) (max lhsZ rhsZ)
-
-    let inline dinstance lhs rhs : ^S = 
+    
+    let inline distance lhs rhs : ^S = 
         match (lhs, rhs) with
         | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> 
             let x = lhsX - rhsX
             let y = lhsY - rhsY
             let z = lhsZ - rhsZ
-            sqrt (x*y + y*y + z*z)
+            sqrt (x * y + y * y + z * z)
+    
+    let inline lerp lhs rhs (factor : ^S) : ^V = 
+        let lerp start finish = start + factor * (finish - start)
+        match (lhs, rhs) with
+        | Vector3(lhsX, lhsY, lhsZ), Vector3(rhsX, rhsY, rhsZ) -> 
+            create (lerp lhsX rhsX) (lerp lhsY rhsY) (lerp lhsZ rhsZ)
+    
+    let inline clamp vector lower upper : ^V = 
+        let clamp (value : ^S) = 
+            if value > upper then upper
+            else if value < lower then lower
+            else value
 
-//TODO: Implement min, max, clamp, lerp, distance, reflect
+        match vector with
+        | Vector3(x, y, z) -> create (clamp x) (clamp y) (clamp z)
