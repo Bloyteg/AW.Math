@@ -34,14 +34,15 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibTessDotNet">
+      <HintPath>..\packages\LibTessDotNet.1.0.1\lib\net20\LibTessDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Equtable.cs" />
-    <Compile Include="Geometry\BoundingBox3.cs" />
-    <Compile Include="Geometry\Polygon.cs" />
     <Compile Include="Geometry\Triangulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Matrix4.cs" />
@@ -49,10 +50,7 @@
     <Compile Include="Vector3.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MrByte.Utility\MrByte.Utility.csproj">
-      <Project>{F6AB8244-41FA-4A22-8F33-5C5230F0CA39}</Project>
-      <Name>MrByte.Utility</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
