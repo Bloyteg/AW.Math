@@ -21,24 +21,48 @@ namespace Bloyteg.AW.Math.Geometry
     public class Triangulator
     {
         private readonly Tess _tessellator = new Tess();
+        private readonly Vector3 _zAxis = new Vector3(0, 0, 1);
+
         private const int PolygonSize = 3;
 
         public Triangulator(IList<Vector3> vertices, IEnumerable<int> indices)
         {
+            var faceNormal = GetFaceNormal(vertices, indices);
+
             var countour = indices.Select(index =>
                 new ContourVertex
                 {
                     Data = index,
-                    Position =
-                        new Vec3
-                        {
-                            X = (float) vertices[index].X,
-                            Y = (float) vertices[index].Y,
-                            Z = (float) vertices[index].Z
-                        }
+                    Position = GetProjectedPosition(vertices[index], faceNormal)
                 }).ToArray();
 
             _tessellator.AddContour(countour, ContourOrientation.CounterClockwise);
+        }
+
+        private Vector3 GetFaceNormal(IList<Vector3> vertices, IEnumerable<int> indices)
+        {
+            var normalsArray = indices.Take(3).ToArray();
+
+            var u = vertices[normalsArray[1]] - vertices[normalsArray[0]];
+            var v = vertices[normalsArray[2]] - vertices[normalsArray[1]];
+            return Vector3.Cross(u, v).Normalize();
+        }
+
+        private Vec3 GetProjectedPosition(Vector3 position, Vector3 faceNormal)
+        {
+            var rotationAxis = Vector3.Cross(faceNormal, _zAxis);
+            var rotationAngle = System.Math.Acos(Vector3.Dot(faceNormal, _zAxis))*(180/System.Math.PI);
+
+            var rotationMatrix = Matrix4.RotationFromAxisAngle(rotationAxis.X, rotationAxis.Y, rotationAxis.Z, rotationAngle);
+
+            var projectedPosition = position*rotationMatrix;
+
+            return new Vec3
+            {
+                X = (float) projectedPosition.X,
+                Y = (float) projectedPosition.Y,
+                Z = 0
+            };
         }
 
         public IEnumerable<Tuple<int, int, int>> GetTriangles()

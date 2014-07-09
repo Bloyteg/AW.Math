@@ -81,6 +81,12 @@ namespace Bloyteg.AW.Math
 
         public Matrix4 Rotate(double xFactor, double yFactor, double zFactor, double degrees)
         {
+            var rotateMatrix = RotationFromAxisAngle(xFactor, yFactor, zFactor, degrees);
+            return new Matrix4(Multiply(rotateMatrix._transformMatrix, _transformMatrix));
+        }
+
+        public static Matrix4 RotationFromAxisAngle(double xFactor, double yFactor, double zFactor, double degrees)
+        {
             var rads = (degrees * System.Math.PI / 180);
             var s = System.Math.Sin(rads);
             var c = System.Math.Cos(rads);
@@ -94,10 +100,7 @@ namespace Bloyteg.AW.Math
                                        {0, 0, 0, 1}
                                    };
 
-            return new Matrix4
-                       {
-                           _transformMatrix = Multiply(rotateMatrix, _transformMatrix)
-                       };
+            return new Matrix4(rotateMatrix);
         }
 
         public Matrix4 Scale(double xFactor, double yFactor, double zFactor)
