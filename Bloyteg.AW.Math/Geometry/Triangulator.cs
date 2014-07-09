@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using LibTessDotNet;
 
 namespace Bloyteg.AW.Math.Geometry
@@ -39,7 +40,7 @@ namespace Bloyteg.AW.Math.Geometry
 
         public IEnumerable<Tuple<int, int, int>> GetTriangles()
         {
-            _tessellator.Tessellate(WindingRule.EvenOdd, ElementType.Polygons, PolygonSize);
+            _tessellator.Tessellate(WindingRule.EvenOdd, ElementType.Polygons, PolygonSize, CombineCallback);
 
             for (int i = 0; i < _tessellator.ElementCount; ++i)
             {
@@ -53,6 +54,16 @@ namespace Bloyteg.AW.Math.Geometry
 
                 yield return Tuple.Create(indices[0], indices[1], indices[2]);
             }
+        }
+
+        private object CombineCallback(Vec3 position, object[] data, float[] weights)
+        {
+            var dataIndex = weights.Select((value, index) => new {value, index})
+                .OrderByDescending(weight => weight.value)
+                .First()
+                .index;
+
+            return data[dataIndex];
         }
     }
 }
